@@ -21,14 +21,36 @@
 #            if newpath: return newpath
 #    return None
 
+# Creates class called graph. Takes in two arguements
+class graph:
+    def __init__(self, graph_dictionary = None):
+        if graph_dictionary is None:
+            graph_dictionary = [] # sets graph_dictionary to an empty list
+        self.graph_dictionary = graph_dictionary
+
+# Get the keys of the dictionary
+    def getNodes(self):
+        return list(self.graph_dictionary.keys()) # "Keys()" method returns a list of
+                                                  # all avaliable keys in a dictionary
+
+# Find list of edges
+    def getEdges(self):
+        edge_name = []
+        for node in self.graph_dictionary:
+            for next_node in self.graph_dictionary[node]:
+                if {next_node, node} not in edge_name:
+                    edge_name.append({node, next_node})
+        return edge_name
 
 # Create the dictionary with graph elements
-graph = {"a" : ["b", "c"],
+graph_elements = {"a" : ["b", "c"],
          "b" : ["a", "d"],
          "c" : ["a", "d"],
          "d" : ["e"],
          "e" : ["d"]
          }
+# "g" is assigned the graph element values from the class graph
+g = graph(graph_elements)
 
 #Print graph
-print(graph)
+print(g.getEdges())
